@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Property } from "@/db/models/PropertyModel";
 import AsideMenu from "@/components/AsideMenu";
 import PropertyCard from "@/components/PropertyCard";
@@ -62,6 +62,17 @@ const Properties = () => {
       }
     }
   );
+
+  const asideRef = useRef<HTMLDivElement>(null);
+  const [dynamicMinHeight, setDynamicMinHeight] = useState<number>(1000); // Default value
+
+  useEffect(() => {
+    if (asideRef.current) {
+      const height = asideRef.current.offsetHeight;
+
+      setDynamicMinHeight(height);
+    }
+  }, []);
 
   if (isLoading)
     return (
@@ -134,9 +145,15 @@ const Properties = () => {
     });
 
   return (
-    <div className="mt-4 bg-white p-6 rounded-lg shadow-md min-h-[130vh] max-w-[850px] mx-auto">
+    <div
+      style={{ height: `${dynamicMinHeight}px` }}
+      className={`mt-4 bg-white p-6 rounded-lg shadow-md max-w-[850px] mx-auto`}
+    >
       <div className="flex flex-col">
-        <div className="my-4 2xl:absolute 2xl:left-8 2xl:p-8 bg-white ">
+        <div
+          ref={asideRef}
+          className="my-4 2xl:absolute 2xl:left-8 2xl:p-8 bg-white "
+        >
           <AsideMenu />
           <PropertiesFilters
             tags={tags}
