@@ -185,6 +185,7 @@ const Property: FunctionComponent<PropertyPageProps> = ({ propertyData }) => {
   return (
     <div className="py-8 md:p-8 bg-gray-50 space-y-12">
       <HeadMetaTags
+        image={propertyData?.image}
         timelineName={propertyData?.title as string}
         timeLineUrl={`${process.env.BASE_URLBASE_URL}/properties/${propertyData?.slug}`}
         siteName={"doxadeptos"}

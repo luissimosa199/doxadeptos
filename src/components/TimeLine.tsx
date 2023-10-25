@@ -2,11 +2,8 @@ import { FunctionComponent } from "react";
 import TimeLineEntry from "./TimeLineEntry";
 import { InputItem, TimeLineEntryData, TimeLineProps } from "@/types";
 import Head from "next/head";
-import ShareButtons from "./ShareButtons";
 import HeadMetaTags from "./HeadMetaTags";
 import formatDateString from "@/utils/formatDateString";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Swal from "sweetalert2";
@@ -94,7 +91,6 @@ const TimeLine: FunctionComponent<TimeLineProps> = ({
     <div className="mb-4 max-w-[850px] mx-auto">
       <Head>
         <HeadMetaTags
-          timeline={timeline}
           timelineName={mainText?.slice(0, 50) || ""}
           timeLineUrl={timeLineUrl}
           message=""
