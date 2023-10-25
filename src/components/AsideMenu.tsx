@@ -12,7 +12,7 @@ const AsideMenu = () => {
           <Link href="/">
             <FontAwesomeIcon
               icon={faHouse}
-              className="mr-2"
+              className="mr-2 w-4"
             />
             <span>Homepage</span>
           </Link>
@@ -21,7 +21,7 @@ const AsideMenu = () => {
           <Link href="/properties">
             <FontAwesomeIcon
               icon={faHouse}
-              className="mr-2"
+              className="mr-2 w-4"
             />
             <span>Properties</span>
           </Link>
@@ -30,7 +30,7 @@ const AsideMenu = () => {
           <Link href="/contact">
             <FontAwesomeIcon
               icon={faHospitalUser}
-              className="mr-2"
+              className="mr-2 w-4"
             />
             <span>Contact</span>
           </Link>
@@ -40,7 +40,7 @@ const AsideMenu = () => {
             <FontAwesomeIcon
               icon={faWhatsapp}
               color="green"
-              className="mr-2"
+              className="mr-2 w-4"
             />
             <span>Whatsapp</span>
           </Link>

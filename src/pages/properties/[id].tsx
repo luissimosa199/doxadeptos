@@ -21,6 +21,7 @@ import { PropertyModel } from "@/db/models/PropertyModel";
 import { useSession } from "next-auth/react";
 import { CustomSession } from "../api/auth/[...nextauth]";
 import HeadMetaTags from "@/components/HeadMetaTags";
+import ShareButtons from "@/components/ShareButtons";
 
 interface PropertyPageProps {
   propertyData?: {
@@ -40,7 +41,6 @@ const Property: FunctionComponent<PropertyPageProps> = ({ propertyData }) => {
   const [imageUploadPromise, setImageUploadPromise] =
     useState<Promise<any> | null>(null);
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
-  const [addNewTimeline, setAddNewTimeline] = useState<boolean>(false);
 
   const queryClient = useQueryClient();
   const { data: session }: { data: CustomSession | null } = useSession();
@@ -247,6 +247,10 @@ const Property: FunctionComponent<PropertyPageProps> = ({ propertyData }) => {
           </div>
 
           <div>
+            <ShareButtons
+              url={`${process.env.NEXT_PUBLIC_BASE_URL}/properties/${propertyData?.slug}`}
+              title={propertyData?.title as string}
+            />
             <h2 className="text-2xl mt-2 ml-2 font-semibold text-gray-800 border-b-2 pb-3">
               Photos:
             </h2>
@@ -353,6 +357,7 @@ export const getServerSideProps = async (
         details: property.details,
         image: property.image || "",
         photos: property.photos || [],
+        slug: property.slug,
       };
       return {
         props: {

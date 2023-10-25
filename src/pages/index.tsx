@@ -1,7 +1,14 @@
+import { useRouter } from "next/router";
 import { GetServerSidePropsContext } from "next/types";
-import React from "react";
+import React, { useEffect } from "react";
 
 const Index = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/properties");
+  }, [router]);
+
   return (
     <div className="text-6xl p-12 min-h-screen font-bold">Redirecting...</div>
   );
@@ -9,11 +16,11 @@ const Index = () => {
 
 export default Index;
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  context.res.writeHead(302, { Location: "/properties" });
-  context.res.end();
-
+export async function getServerSideProps() {
   return {
-    props: {},
+    redirect: {
+      destination: "/properties",
+      permanent: false,
+    },
   };
 }
