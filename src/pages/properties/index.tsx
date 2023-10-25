@@ -17,6 +17,7 @@ interface PropertyInterface {
   tags: string[];
   isArchived: boolean;
   slug: string;
+  details: string;
 }
 
 const Properties = () => {
@@ -189,7 +190,6 @@ const Properties = () => {
           return (
             <PropertyCard
               key={idx}
-              session={session}
               property={property}
               favoritesLoading={favoritesLoading}
               isFavorites={

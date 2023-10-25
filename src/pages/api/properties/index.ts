@@ -41,7 +41,7 @@ export default async function handler(
       }
 
       const properties = await PropertyModel.find()
-        .select("email title image tags isArchived slug")
+        .select("email title image tags isArchived slug details")
         .sort({ createdAt: -1 });
       if (!properties) {
         return res.status(404).json({ error: "No propertys found" });

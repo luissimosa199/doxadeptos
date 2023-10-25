@@ -1,18 +1,5 @@
-import {
-  faAddressCard,
-  faArrowUpShortWide,
-  faAward,
-  faDollar,
-  faEnvelope,
-  faHospitalUser,
-  faHouse,
-  faImage,
-  faMessage,
-  faPenToSquare,
-  faSackDollar,
-  faShareNodes,
-  faVideo,
-} from "@fortawesome/free-solid-svg-icons";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { faHospitalUser, faHouse } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import React from "react";
@@ -33,7 +20,7 @@ const AsideMenu = () => {
         <li>
           <Link href="/properties">
             <FontAwesomeIcon
-              icon={faHospitalUser}
+              icon={faHouse}
               className="mr-2"
             />
             <span>Properties</span>
@@ -46,6 +33,15 @@ const AsideMenu = () => {
               className="mr-2"
             />
             <span>Contact</span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/contact">
+            <FontAwesomeIcon
+              icon={faWhatsapp}
+              className="mr-2"
+            />
+            <span>Whatsapp</span>
           </Link>
         </li>
       </ul>

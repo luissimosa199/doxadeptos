@@ -1,21 +1,12 @@
-import {
-  faPenToSquare,
-  faVideoCamera,
-  faMessage,
-  faBoxArchive,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import router from "next/router";
 import React, { FunctionComponent } from "react";
 import { CldImage } from "next-cloudinary";
 import { noProfileImage } from "@/utils/noProfileImage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toggleFavorite } from "@/utils/toggleFavorite";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { Property } from "@/db/models/PropertyModel";
-import { CustomSession } from "@/pages/api/auth/[...nextauth]";
+import PropertyCardButtons from "./PropertyCardButtons";
+import ShareButtons from "./ShareButtons";
 
 interface UserInterface {
   property: {
@@ -25,15 +16,14 @@ interface UserInterface {
     _id: string;
     isArchived: boolean;
     slug: string;
+    details: string;
   };
-  session: CustomSession | null;
   favoritesLoading: boolean;
   isFavorites: boolean;
 }
 
 const PropertyCard: FunctionComponent<UserInterface> = ({
   property,
-  session,
   favoritesLoading,
   isFavorites,
 }) => {
@@ -101,10 +91,10 @@ const PropertyCard: FunctionComponent<UserInterface> = ({
   return (
     <li
       key={property._id}
-      className="py-4 space-y-4"
+      className="my-4 shadow-md sm:shadow-none "
     >
-      <div className="flex items-center gap-4">
-        <div className="rounded-full h-[50px] min-w-[50px] border-2 overflow-hidden relative">
+      <div className="flex flex-col sm:flex-row items-center gap-4">
+        <div className="h-[300px] w-full sm:w-auto sm:min-w-[400px] overflow-hidden relative">
           <Link href={`/properties/${property.slug}`}>
             <CldImage
               alt={`foto de ${property.title}`}
@@ -114,96 +104,37 @@ const PropertyCard: FunctionComponent<UserInterface> = ({
             />
           </Link>
         </div>
-        <Link href={`/properties/${property.slug}`}>
-          <div className="flex flex-col">
-            <p className="text-lg font-medium">{property.title}</p>
-            {property.isArchived && (
-              <p className="text-sm text-slate-400 font-medium">(Occupied)</p>
-            )}
-          </div>
-        </Link>
-
-        <div className="ml-auto flex gap-2">
-          <button
-            className={`${
-              favoritesLoading
-                ? "animate-pulse"
-                : isFavorites
-                ? "text-yellow-500 sm:hover:text-black"
-                : "text-black active:text-yellow-500 sm:hover:text-yellow-500"
-            } w-6`}
-            onClick={(e) => {
-              e.preventDefault();
-              if (!session?.user) {
-                router.push("/login");
-                return;
-              }
-              const method = isFavorites ? "DELETE" : "POST";
-              favoriteMutation.mutate({ _id: property._id, method });
-            }}
-          >
-            <FontAwesomeIcon
-              size="lg"
-              icon={isFavorites ? faStar : farStar}
+        <div className="flex flex-col gap-2 pb-4 w-full px-2 justify-between sm:h-[300px] sm:overflow-hidden sm:px-0 sm:w-auto sm:self-start">
+          <div className="flex gap-2">
+            <PropertyCardButtons
+              favoritesLoading={favoritesLoading}
+              isFavorites={isFavorites}
+              archiveMutation={archiveMutation}
+              favoriteMutation={favoriteMutation}
+              property={property}
             />
-          </button>
-
-          {session?.user && session?.role === "ADMIN" && (
-            <>
-              <button
-                className="hover:text-green-500 transition"
-                onClick={(e) => {
-                  e.preventDefault();
-                  router.push(
-                    `/chat/${(session?.user?.email as string).split("@")[0]}y${
-                      property.title
-                    }`
-                  );
-                }}
-              >
-                <FontAwesomeIcon
-                  size="lg"
-                  icon={faMessage}
-                />
-              </button>
-              <button
-                className="hover:text-blue-500 transition"
-                onClick={(e) => {
-                  e.preventDefault();
-                  router.push(`/videocall?name=${property.title}`);
-                }}
-              >
-                <FontAwesomeIcon
-                  size="lg"
-                  icon={faVideoCamera}
-                />
-              </button>
-              <button
-                className="hover:text-blue-500 transition"
-                onClick={(e) => {
-                  e.preventDefault();
-                  router.push(`/properties/edit/${property._id}`);
-                }}
-              >
-                <FontAwesomeIcon
-                  icon={faPenToSquare}
-                  size="lg"
-                />
-              </button>
-              <button
-                className="hover:text-yellow-500 transition"
-                onClick={(e) => {
-                  e.preventDefault();
-                  archiveMutation.mutate(property._id);
-                }}
-              >
-                <FontAwesomeIcon
-                  icon={faBoxArchive}
-                  size="lg"
-                />
-              </button>
-            </>
-          )}
+            <Link href={`/properties/${property.slug}`}>
+              <div className="flex flex-col">
+                <p className="text-lg md:text-3xl font-medium">
+                  {property.title}
+                </p>
+                {property.isArchived && (
+                  <p className="text-sm text-slate-400 font-medium">
+                    (Occupied)
+                  </p>
+                )}
+              </div>
+            </Link>
+          </div>
+          <div className="hidden sm:block">
+            {`${property.details.substring(0, 150)}${
+              property.details.length > 150 ? "..." : ""
+            }`}
+          </div>
+          <ShareButtons
+            url={`${process.env.NEXT_PUBLIC_BASE_URL}/properties/${property.slug}`}
+            title={property.title}
+          />
         </div>
       </div>
     </li>
