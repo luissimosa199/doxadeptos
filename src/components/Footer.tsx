@@ -21,8 +21,8 @@ const Footer = () => {
           <span className="hover:underline">Properties</span>
         </Link>
 
-        <Link href="/login">
-          <span className="hover:underline">Log in</span>
+        <Link href="/blog">
+          <span className="hover:underline">Blog</span>
         </Link>
       </div>
     </footer>

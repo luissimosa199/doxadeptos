@@ -36,9 +36,10 @@ const AsideMenu = () => {
           </Link>
         </li>
         <li>
-          <Link href="/contact">
+          <Link href="https://api.whatsapp.com/send?phone=5491156160290">
             <FontAwesomeIcon
               icon={faWhatsapp}
+              color="green"
               className="mr-2"
             />
             <span>Whatsapp</span>

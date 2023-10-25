@@ -3,11 +3,12 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { Property } from "@/db/models/PropertyModel";
+import { Property, PropertyModel } from "@/db/models/PropertyModel";
 import AsideMenu from "@/components/AsideMenu";
 import PropertyCard from "@/components/PropertyCard";
 import PropertiesFilters from "@/components/PropertiesFilters";
 import { CustomSession } from "../api/auth/[...nextauth]";
+import dbConnect from "@/db/dbConnect";
 
 interface PropertyInterface {
   title: string;
@@ -20,7 +21,11 @@ interface PropertyInterface {
   details: string;
 }
 
-const Properties = () => {
+const Properties = ({
+  initialPropertiesData,
+}: {
+  initialPropertiesData: PropertyInterface[];
+}) => {
   const { data: session }: { data: CustomSession | null } = useSession();
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -29,6 +34,8 @@ const Properties = () => {
   const [filterByFavorites, setFilterByFavorites] = useState<boolean>(false);
 
   const fetchProperties = async () => {
+    if (initialPropertiesData) return initialPropertiesData;
+
     const response = await fetch("/api/properties", {
       method: "GET",
     });
@@ -43,7 +50,10 @@ const Properties = () => {
     data: properties,
     error,
     isLoading,
-  } = useQuery(["properties"], fetchProperties);
+  } = useQuery(["properties"], fetchProperties, {
+    initialData: initialPropertiesData,
+    staleTime: 1000 * 60 * 5,
+  });
 
   const {
     data: favorites,
@@ -204,3 +214,18 @@ const Properties = () => {
 };
 
 export default Properties;
+
+export async function getServerSideProps() {
+  await dbConnect();
+
+  const initialPropertiesData = await PropertyModel.find()
+    .select("email title image tags isArchived slug details")
+    .sort({ createdAt: -1 })
+    .lean();
+
+  return {
+    props: {
+      initialPropertiesData,
+    },
+  };
+}

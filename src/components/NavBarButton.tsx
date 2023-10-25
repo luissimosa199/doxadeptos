@@ -44,6 +44,9 @@ const NavBarButton = () => {
           <li>
             <Link href="/contact">Contact</Link>
           </li>
+          <li>
+            <Link href="/blog">Blog</Link>
+          </li>
         </ul>
       )}
     </button>
