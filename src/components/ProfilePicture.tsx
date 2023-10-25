@@ -9,6 +9,7 @@ interface ProfilePictureProps {
   userId?: string;
   w?: string;
   h?: string;
+  rounded?: boolean;
   type: "user" | "properties";
 }
 
@@ -17,6 +18,7 @@ const ProfilePicture: FunctionComponent<ProfilePictureProps> = ({
   w,
   h,
   type,
+  rounded = true,
 }) => {
   const { data: session } = useSession();
 
@@ -67,7 +69,9 @@ const ProfilePicture: FunctionComponent<ProfilePictureProps> = ({
           src={(data.image as string) || noProfileImage}
           fill
           alt={`${userId}'s Avatar`}
-          className={`object-cover absolute rounded-full border-2 border-gray-300 w-full`}
+          className={`object-cover absolute ${
+            rounded && "rounded-full"
+          } border-2 border-gray-300 w-full`}
         />
       </div>
     </Link>

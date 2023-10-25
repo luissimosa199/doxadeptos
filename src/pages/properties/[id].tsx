@@ -206,8 +206,9 @@ const Property: FunctionComponent<PropertyPageProps> = ({ propertyData }) => {
           <div className="flex flex-col items-center lg:flex-row gap-2 px-2">
             <div className="min-h-[128px] flex flex-col items-center relative">
               <ProfilePicture
-                h="h-[150px]"
-                w="w-[150px]"
+                rounded={false}
+                h="h-[300px]"
+                w="w-[300px]"
                 type="properties"
                 userId={propertyData?._id as string}
               />

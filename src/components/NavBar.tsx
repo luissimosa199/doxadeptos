@@ -34,7 +34,7 @@ const Navbar = () => {
           </div>
         ) : (
           <Link href="/login">
-            <p className="text-3xl">Log in</p>
+            <p className="text-lg">Log in</p>
           </Link>
         )}
 

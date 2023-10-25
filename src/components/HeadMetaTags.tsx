@@ -22,15 +22,24 @@ const HeadMetaTags: FunctionComponent<HeadMetaTagsProps> = ({
         <meta
           property="og:image"
           itemProp="image"
-          content={image}
+          content={image.replace("upload/", `upload/c_scale,h_630,w_1200/`)}
         />
       )}
       {image && (
         <meta
           name="twitter:image"
-          content={image}
+          content={image.replace("upload/", `upload/c_scale,h_512,w_1024/`)}
         />
       )}
+
+      <meta
+        property="og:image:width"
+        content="1200"
+      />
+      <meta
+        property="og:image:height"
+        content="630"
+      />
 
       <meta
         property="og:url"
