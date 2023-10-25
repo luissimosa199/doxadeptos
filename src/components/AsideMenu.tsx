@@ -40,102 +40,12 @@ const AsideMenu = () => {
           </Link>
         </li>
         <li>
-          <Link href="/dev/cobros">
+          <Link href="/contact">
             <FontAwesomeIcon
-              icon={faDollar}
+              icon={faHospitalUser}
               className="mr-2"
             />
-            <span>Cobros</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/dev/obtener_mas_pacientes">
-            <FontAwesomeIcon
-              icon={faArrowUpShortWide}
-              className="mr-2"
-            />
-            <span>Obtener más pacientes</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/videocall">
-            <FontAwesomeIcon
-              icon={faVideo}
-              className="mr-2"
-            />
-            <span>Video Conferencia</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/pacientes">
-            <FontAwesomeIcon
-              icon={faMessage}
-              className="mr-2"
-            />
-            <span>Chat</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/dev/tarjeta_personal">
-            <FontAwesomeIcon
-              icon={faAddressCard}
-              className="mr-2"
-            />
-            <span>Tarjeta personal</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/dev/cuadro_de_honor">
-            <FontAwesomeIcon
-              icon={faAward}
-              className="mr-2"
-            />
-            <span>Cuadro de honor</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/dev/compartir_perfil">
-            <FontAwesomeIcon
-              icon={faShareNodes}
-              className="mr-2"
-            />
-            <span>Compartir mi perfil</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/dev/editar_perfil">
-            <FontAwesomeIcon
-              icon={faPenToSquare}
-              className="mr-2"
-            />
-            <span>Editar mi perfil</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/">
-            <FontAwesomeIcon
-              icon={faImage}
-              className="mr-2"
-            />
-            <span>Publicar nota/foto/texto</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/dev/invitar_colegas">
-            <FontAwesomeIcon
-              icon={faEnvelope}
-              className="mr-2"
-            />
-            <span>Invitar colegas</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/dev/promocion">
-            <FontAwesomeIcon
-              icon={faSackDollar}
-              className="mr-2"
-            />
-            <span>Promoción</span>
+            <span>Contact</span>
           </Link>
         </li>
       </ul>

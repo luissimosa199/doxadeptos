@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node messageServer.js",
+    "dev": "next dev",
     "build": "next build",
-    "start": "NODE_ENV=production node messageServer.js",
+    "start": "next start",
     "lint": "next lint",
     "test": "jest && npm run build"
   },

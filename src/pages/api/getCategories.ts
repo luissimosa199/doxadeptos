@@ -1,6 +1,6 @@
-import { TimeLineModel } from "../../db/models";
 import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../db/dbConnect";
+import { PropertyModel } from "@/db/models/PropertyModel";
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,7 +10,7 @@ export default async function handler(
 
   if (req.method === "GET") {
     try {
-      const tags = await TimeLineModel.distinct("tags");
+      const tags = await PropertyModel.distinct("tags");
 
       res.status(200).json(tags);
     } catch (error) {

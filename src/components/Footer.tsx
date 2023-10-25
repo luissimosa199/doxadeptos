@@ -11,24 +11,18 @@ const Footer = () => {
           <span className="hover:underline">Homepage</span>
         </Link>
 
-        <Link href="/profile">
-          <span className="hover:underline">Profile</span>
+        <Link href="/contact">
+          <span className="hover:underline">Contact</span>
         </Link>
       </div>
 
       <div className="flex flex-col gap-2 mb-2 md:mb-4">
-        <Link href="/videocall">
-          <span className="hover:underline">Start videocall</span>
-        </Link>
-
         <Link href="/properties">
           <span className="hover:underline">Properties</span>
         </Link>
-      </div>
 
-      <div className="flex flex-col gap-2 mb-2 md:mb-4">
-        <Link href="/videocall">
-          <span className="hover:underline">Videocalls</span>
+        <Link href="/login">
+          <span className="hover:underline">Log in</span>
         </Link>
       </div>
     </footer>

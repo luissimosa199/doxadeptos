@@ -6,7 +6,6 @@ import {
   faArrowLeft,
   faEnvelope,
   faPhone,
-  faPlus,
   faUser,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
@@ -16,11 +15,9 @@ import Image from "next/image";
 import PhotoInput from "@/components/PhotoInput";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { handleFileAdding, uploadImages } from "@/utils/formHelpers";
-import PrimaryForm from "@/components/PrimaryForm";
 import ProfilePicture from "@/components/ProfilePicture";
 import mongoose from "mongoose";
 import { PropertyModel } from "@/db/models/PropertyModel";
-import PropertyTimelines from "@/components/PropertyTimelines";
 import { useSession } from "next-auth/react";
 import { CustomSession } from "../api/auth/[...nextauth]";
 
@@ -198,7 +195,7 @@ const Property: FunctionComponent<PropertyPageProps> = ({ propertyData }) => {
       </div>
       <div className="max-w-[850px] mx-auto">
         <div className="flex flex-col justify-around items-center border rounded-lg py-6 md:p-6 bg-white shadow-lg">
-          <div className="flex flex-col items-center lg:flex-row gap-2">
+          <div className="flex flex-col items-center lg:flex-row gap-2 px-2">
             <div className="min-h-[128px] flex flex-col items-center relative">
               <ProfilePicture
                 h="h-[150px]"
@@ -243,7 +240,7 @@ const Property: FunctionComponent<PropertyPageProps> = ({ propertyData }) => {
           </div>
 
           <div>
-            <h2 className="text-2xl mt-2 font-semibold text-gray-800 border-b-2 pb-3">
+            <h2 className="text-2xl mt-2 ml-2 font-semibold text-gray-800 border-b-2 pb-3">
               Photos:
             </h2>
             <UserPhotos
@@ -251,7 +248,7 @@ const Property: FunctionComponent<PropertyPageProps> = ({ propertyData }) => {
               queryKey={["propertyPhotos", propertyData?._id as string]}
             />
             {session?.user && session?.role === "ADMIN" && (
-              <div className="w-24 mx-auto">
+              <div className="w-24 mx-auto flex justify-center">
                 <PhotoInput
                   handleUploadImages={handleUploadImages}
                   id="propertyphotos"
@@ -312,40 +309,6 @@ const Property: FunctionComponent<PropertyPageProps> = ({ propertyData }) => {
                 {isUploading ? "Subiendo..." : "Subir"}
               </button>
             )}
-          </div>
-
-          <div className="w-full">
-            <div className="mt-2 border-b-2 pb-3">
-              <div className="flex justify-between px-2 md:px-0">
-                <h2 className="text-2xl font-semibold text-gray-800 ">
-                  Posts:
-                </h2>
-                {session?.user && session?.role === "ADMIN" && (
-                  <button
-                    className={`border-2 w-10 rounded p-2 ${
-                      addNewTimeline ? "bg-gray-200" : "bg-white"
-                    } text-slate-600 transition`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setAddNewTimeline(!addNewTimeline);
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faPlus} />
-                  </button>
-                )}
-              </div>
-              {addNewTimeline && session?.user && session?.role === "ADMIN" && (
-                <PrimaryForm
-                  propertyData={{
-                    propertyId: propertyData?._id as string,
-                    propertyTitle: propertyData?.title as string,
-                  }}
-                />
-              )}
-            </div>
-            <div>
-              <PropertyTimelines userId={propertyData?._id as string} />
-            </div>
           </div>
         </div>
       </div>

@@ -39,16 +39,10 @@ const NavBarButton = () => {
             <Link href="/">Homepage</Link>
           </li>
           <li>
-            <Link href="/profile">Profile</Link>
-          </li>
-          <li>
-            <Link href="/videocall">Start videocall</Link>
-          </li>
-          <li>
             <Link href="/properties">Properties</Link>
           </li>
           <li>
-            <Link href="/properties">Videocalls</Link>
+            <Link href="/contact">Contact</Link>
           </li>
         </ul>
       )}

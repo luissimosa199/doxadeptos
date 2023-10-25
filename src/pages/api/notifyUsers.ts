@@ -1,7 +1,3 @@
-// pages/api/notifyUsers.ts
-
-import { VideoCallChatModel } from "@/db/models/videoCallChatModel";
-import { sendNotificationToUser } from "@/utils/sendNotificationToUser";
 import { NextApiRequest, NextApiResponse } from "next";
 import "../../utils/webPushSetup";
 
@@ -20,14 +16,6 @@ export default async function handler(
   }
 
   try {
-    // Fetch users subscribed to this chat
-    const chat = await VideoCallChatModel.findOne({ _id: channelName });
-    if (!chat) {
-      return res.status(404).json({ error: "Chat not found" });
-    }
-
-    const subscribers = chat.subscribedForNotifications || [];
-
     const payload = JSON.stringify({
       message: "Alguien quiere chatear con vos!",
       url: `${process.env.NEXT_PUBLIC_BASE_URL as string}/chat/${encodeURI(
@@ -36,9 +24,11 @@ export default async function handler(
     });
 
     // Send notifications to those users
-    for (const userId of subscribers) {
-      await sendNotificationToUser(userId, payload);
-    }
+    // for (const userId of subscribers) {
+    //   await sendNotificationToUser(userId, payload);
+    // }
+
+    console.log(payload);
 
     res.status(200).json({ success: true });
   } catch (error) {

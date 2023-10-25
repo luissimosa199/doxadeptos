@@ -24,7 +24,7 @@ const Properties = () => {
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [nameFilter, setNameFilter] = useState("");
-  const [showArchived, setShowArchived] = useState(false);
+  // const [showArchived, setShowArchived] = useState(false);
   const [filterByFavorites, setFilterByFavorites] = useState<boolean>(false);
 
   const fetchProperties = async () => {
@@ -63,17 +63,6 @@ const Properties = () => {
     }
   );
 
-  const asideRef = useRef<HTMLDivElement>(null);
-  const [dynamicMinHeight, setDynamicMinHeight] = useState<number>(1000); // Default value
-
-  useEffect(() => {
-    if (asideRef.current) {
-      const height = asideRef.current.offsetHeight;
-
-      setDynamicMinHeight(height);
-    }
-  }, []);
-
   if (isLoading)
     return (
       <div className="mt-4 min-h-screen bg-white p-6 rounded-lg shadow-md animate-pulse">
@@ -106,17 +95,17 @@ const Properties = () => {
   ) as string[];
 
   const filteredProperties = properties
-    .filter((property: Property) => {
-      // If no filters are applied, take archived status into account
-      if (!nameFilter && selectedTags.length === 0) {
-        if (showArchived) {
-          return property.isArchived === true;
-        } else {
-          return property.isArchived !== true; // handles both undefined and false cases
-        }
-      }
-      return true; // If any filter is applied, we don't filter out by archived status here.
-    })
+    // .filter((property: Property) => {
+    //   // If no filters are applied, take archived status into account
+    //   if (!nameFilter && selectedTags.length === 0) {
+    //     if (showArchived) {
+    //       return property.isArchived === true;
+    //     } else {
+    //       return property.isArchived !== true; // handles both undefined and false cases
+    //     }
+    //   }
+    //   return true; // If any filter is applied, we don't filter out by archived status here.
+    // })
     .filter((property: PropertyInterface) => {
       // Handle name filtering
       return nameFilter
@@ -146,14 +135,10 @@ const Properties = () => {
 
   return (
     <div
-      style={{ height: `${dynamicMinHeight}px` }}
-      className={`mt-4 bg-white p-6 rounded-lg shadow-md max-w-[850px] mx-auto`}
+      className={`mt-4 min-h-[130vh] bg-white p-6 rounded-lg shadow-md max-w-[850px] mx-auto`}
     >
       <div className="flex flex-col">
-        <div
-          ref={asideRef}
-          className="my-4 2xl:absolute 2xl:left-8 2xl:p-8 bg-white "
-        >
+        <div className="my-4 2xl:absolute 2xl:left-8 2xl:p-8 bg-white ">
           <AsideMenu />
           <PropertiesFilters
             tags={tags}
@@ -175,12 +160,12 @@ const Properties = () => {
             )}
           </div>
 
-          <button
+          {/* <button
             className="w-fit inline-flex items-center p-4 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-800 transition ease-in-out duration-150"
             onClick={() => setShowArchived(!showArchived)}
           >
             {showArchived ? "Available properties" : "Occupied properties"}
-          </button>
+          </button> */}
         </div>
         <input
           type="text"

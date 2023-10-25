@@ -24,7 +24,7 @@ const PhotoInput: FunctionComponent<PhotoInput> = ({
   return (
     <label
       htmlFor={id}
-      className={` w-6 relative text-center flex flex-col items-center justify-center p-4 border rounded hover:bg-gray-200 cursor-pointer ${
+      className={` w-6 relative text-center flex flex-col items-center justify-center p-4 rounded hover:bg-gray-200 cursor-pointer ${
         isSmall ? "p-2" : "w-full"
       }`}
     >
