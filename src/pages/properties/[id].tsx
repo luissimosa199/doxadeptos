@@ -20,6 +20,7 @@ import mongoose from "mongoose";
 import { PropertyModel } from "@/db/models/PropertyModel";
 import { useSession } from "next-auth/react";
 import { CustomSession } from "../api/auth/[...nextauth]";
+import HeadMetaTags from "@/components/HeadMetaTags";
 
 interface PropertyPageProps {
   propertyData?: {
@@ -29,6 +30,7 @@ interface PropertyPageProps {
     tlf: string;
     details: string;
     image: string;
+    slug: string;
   };
 }
 
@@ -182,6 +184,11 @@ const Property: FunctionComponent<PropertyPageProps> = ({ propertyData }) => {
 
   return (
     <div className="py-8 md:p-8 bg-gray-50 space-y-12">
+      <HeadMetaTags
+        timelineName={propertyData?.title as string}
+        timeLineUrl={`${process.env.BASE_URLBASE_URL}/properties/${propertyData?.slug}`}
+        siteName={"doxadeptos"}
+      />
       <div className="flex gap-2 ml-2 items-center">
         <Link
           href="/properties"
