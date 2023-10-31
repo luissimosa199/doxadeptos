@@ -159,13 +159,13 @@ const EditProperty = () => {
           >
             Details
           </label>
-          <input
+          <textarea
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             name="details"
-            type="text"
+            rows={20}
             id="details"
             defaultValue={property.details}
-          />
+          ></textarea>
         </div>
 
         <div className="mb-4">
