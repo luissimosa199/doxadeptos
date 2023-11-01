@@ -6,7 +6,7 @@ import React from "react";
 
 const AsideMenu = () => {
   return (
-    <div className="2xl:shadow-md 2xl:block hidden p-4 rounded-lg mt-2">
+    <div className="lg:shadow-md lg:block hidden p-4 rounded-lg mt-2">
       <ul className="flex flex-col gap-2">
         <li>
           <Link href="/">

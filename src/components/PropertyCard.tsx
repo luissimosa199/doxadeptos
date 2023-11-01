@@ -105,14 +105,7 @@ const PropertyCard: FunctionComponent<UserInterface> = ({
           </Link>
         </div>
         <div className="flex flex-col gap-2 pb-4 w-full px-2 justify-between sm:h-[300px] sm:overflow-hidden sm:px-0 sm:w-auto sm:self-start">
-          <div className="flex gap-2">
-            <PropertyCardButtons
-              favoritesLoading={favoritesLoading}
-              isFavorites={isFavorites}
-              archiveMutation={archiveMutation}
-              favoriteMutation={favoriteMutation}
-              property={property}
-            />
+          <div className="flex flex-wrap gap-2">
             <Link href={`/properties/${property.slug}`}>
               <div className="flex flex-col">
                 <p className="text-lg md:text-3xl font-medium">
@@ -125,6 +118,13 @@ const PropertyCard: FunctionComponent<UserInterface> = ({
                 )}
               </div>
             </Link>
+            <PropertyCardButtons
+              favoritesLoading={favoritesLoading}
+              isFavorites={isFavorites}
+              archiveMutation={archiveMutation}
+              favoriteMutation={favoriteMutation}
+              property={property}
+            />
           </div>
           <div className="hidden sm:block">
             {`${property.details.substring(0, 150)}${

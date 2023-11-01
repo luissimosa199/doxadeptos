@@ -1,8 +1,7 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Property, PropertyModel } from "@/db/models/PropertyModel";
 import AsideMenu from "@/components/AsideMenu";
 import PropertyCard from "@/components/PropertyCard";
@@ -30,7 +29,6 @@ const Properties = ({
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [nameFilter, setNameFilter] = useState("");
-  // const [showArchived, setShowArchived] = useState(false);
   const [filterByFavorites, setFilterByFavorites] = useState<boolean>(false);
 
   const fetchProperties = async () => {
@@ -146,10 +144,10 @@ const Properties = ({
 
   return (
     <div
-      className={`mt-4 min-h-[130vh] bg-white p-6 rounded-lg shadow-md max-w-[850px] mx-auto`}
+      className={`mt-4 min-h-[130vh] bg-white p-6 rounded-lg shadow-md max-w-[650px] 2xl:max-w-[850px] mx-auto`}
     >
       <div className="flex flex-col">
-        <div className="my-4 2xl:absolute 2xl:left-8 2xl:p-8 bg-white ">
+        <div className="my-4 lg:absolute lg:left-8 2xl:p-8 bg-white ">
           <AsideMenu />
           <PropertiesFilters
             tags={tags}
